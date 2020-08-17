@@ -24,6 +24,12 @@ try {
     console.log(error);
 }
   
+//require and use routes on the next few lines
+const exercisesRouter = require('./routes/exercise');
+const userRouter = require('./routes/user');
+
+app.use('/exercises', exercisesRouter);
+app.user('/user', userRouter);
 
 app.get('/', function(req,res){
     res.json('Up and running');
