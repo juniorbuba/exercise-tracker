@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const chalk = require('chalk');
 const mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -15,7 +16,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
+  console.log(chalk.green.bold("Connection to Database Successful"));
 })
 
 const exercisesRouter = require('./routes/exercises');
