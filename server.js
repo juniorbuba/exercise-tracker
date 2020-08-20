@@ -5,15 +5,16 @@ const chalk = require('chalk');
 
 require('dotenv').config();
 
-var app = express();
-var port = process.env.port || 5000;
+const app = express();
+const port = process.env.port || 5000;
 
 app.use(cors());
+app.use(express.json());
 
 const mongooseconnection = mongoose.connection;
 const uri = process.env.MONGODB_URL;
 
-mongoose.connect(uri, { useNewUrlParser: true });
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 
 try {
    mongooseconnection.once('open', () => {
@@ -25,11 +26,11 @@ try {
 }
   
 //require and use routes on the next few lines
-const exercisesRouter = require('./routes/exercise');
-const userRouter = require('./routes/user');
+const exercisesRouter = require('./routes/exercises');
+const userRouter = require('./routes/users');
 
 app.use('/exercises', exercisesRouter);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 app.listen(port, () => {
     console.log(chalk.green.bold.inverse(`Server is running on port ${port}`));
