@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { Timestamp } = require('mongodb');
 const Schema = mongoose.Schema;
 
 const exerciseSchema = new Schema({
