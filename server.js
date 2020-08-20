@@ -12,12 +12,16 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.MONGODB_URL;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
 );
 const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log(chalk.green.bold("Connection to Database Successful"));
-})
+try{
+    connection.once('open', () => {
+      console.log(chalk.green.bold("Connection to Database Successful"));
+    });
+}catch{
+    console.log(err);
+}
 
 const exercisesRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
